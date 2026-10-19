@@ -24,6 +24,8 @@ jobs:
           npx cap add android
           npm run icons
           npx cap sync android
+          sed -i 's#<application#<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />\n    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />\n    <uses-feature android:name="android.hardware.location.gps" android:required="false" />\n    <application#' android/app/src/main/AndroidManifest.xml
+          grep -c "ACCESS_FINE_LOCATION" android/app/src/main/AndroidManifest.xml
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
